@@ -21,7 +21,6 @@ wsServer.on('connect', function(connection){
 })
 wsServer.on('request', function(request) {
     var connection = request.accept(null, request.origin);
-
     
     // This is the most important callback for us, we'll handle
     // all messages from users here.

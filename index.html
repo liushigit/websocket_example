@@ -32,7 +32,20 @@
       function onMessage(e) {
         var message = e.data;
         var el = document.createElement('p');
-        el.innerHTML = message
+        // var text = document.createTextNode(message)
+        // el.appendChild(text)
+        /*
+        ** textContent **
+        Differences from innerHTML
+
+        innerHTML returns the HTML as its name indicates. Quite often, 
+        in order to retrieve or write text within an element, 
+        people use innerHTML. textContent should be used instead. 
+        Because the text is not parsed as HTML, 
+        it's likely to have better performance. 
+        Moreover, this avoids an XSS attack vector.
+        */
+        el.textContent = message
         output.appendChild(el)
       }
       
