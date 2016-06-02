@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <title>WS Demo</title>
+  <body>
+      <div id="output"></div>
+      <input type="text" id="inputBox">
+      <button id="talkButton">发言</button>
+    <script>
+(function() {
+      var ws = null
+      var url = 'ws://127.0.0.1:1337'
+      
+      var output = document.getElementById('output')
+      var talkButton = document.getElementById('talkButton')
+      var inputBox = document.getElementById('inputBox')
+      
+      function onOpen(e) {
+        
+        talkButton.onclick = function (e) {
+          
+          var message = inputBox.value
+          console.log("clicked", message)
+          ws.send(message)
+        }
+      }
+      
+      function onClose(e) {
+        
+      }
+      
+      function onMessage(e) {
+        var message = e.data;
+        var el = document.createElement('p');
+        el.innerHTML = message
+        output.appendChild(el)
+      }
+      
+      function onError(e) {
+        
+      }
+      
+      function init(e){
+        ws = new WebSocket(url);
+        ws.onopen = function(evt) { onOpen(evt) }; 
+        ws.onclose = function(evt) { onClose(evt) }; 
+        ws.onmessage = function(evt) { onMessage(evt) };
+        ws.onerror = function(evt) { onError(evt) };
+      }
+      
+      window.addEventListener('load', init, false);
+      
+})()      
+    </script>
